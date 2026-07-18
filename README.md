@@ -111,3 +111,25 @@ Este proyecto está distribuido bajo la licencia **MIT**.
 ## Autor
 
 Desarrollado por **Zaidcrack**.
+
+
+## ⚠️ Descargo de responsabilidad
+
+ADtool ha sido desarrollado con fines educativos, de investigación y para realizar auditorías de seguridad autorizadas.
+
+El uso de esta herramienta contra sistemas o redes sin autorización expresa puede ser ilegal y constituir un delito en algunas jurisdicciones.
+
+El autor no se hace responsable del uso indebido, daños, pérdidas o consecuencias derivadas del uso de este software.
+
+Al utilizar ADtool, el usuario acepta que es el único responsable de cumplir con las leyes y regulaciones aplicables en su país.
+
+## ⚠️ Aviso legal
+
+ADtool está destinado exclusivamente para pruebas de penetración autorizadas, laboratorios de aprendizaje y fines de investigación.
+
+No utilice esta herramienta contra sistemas para los que no tenga autorización explícita.
+
+El autor no asume ninguna responsabilidad por el uso indebido de este software, incluyendo actividades ilegales o daños ocasionados a terceros.
+
+Si trabaja para organismos gubernamentales, militares, de inteligencia o cualquier otra organización, asegúrese de contar con la autorización correspondiente antes de utilizar esta herramienta.
+
