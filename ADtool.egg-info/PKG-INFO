@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: ADtool
+Version: 0.1
+Requires-Dist: impacket
+Requires-Dist: ldap3
+Requires-Dist: pyasn1
+Requires-Dist: pyOpenSSL
+Requires-Dist: cryptography
+Requires-Dist: scapy
+Requires-Dist: rich
+Requires-Dist: typer
+Requires-Dist: tabulate
+Requires-Dist: requests
+Requires-Dist: colorama
+Requires-Dist: pyfiglet
+Requires-Dist: dnspython
+Dynamic: requires-dist

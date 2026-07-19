@@ -1,0 +1,13 @@
+impacket
+ldap3
+pyasn1
+pyOpenSSL
+cryptography
+scapy
+rich
+typer
+tabulate
+requests
+colorama
+pyfiglet
+dnspython

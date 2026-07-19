@@ -1,0 +1,2 @@
+[console_scripts]
+adtool = AD.cli:app
