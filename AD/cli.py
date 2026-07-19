@@ -12,6 +12,10 @@ from AD.plugins import winrm as winrm_module
 from AD.plugins import gc as gc_module
 from AD.plugins import adws as adws_module
 from AD.plugins import domain as domain_module
+from AD.plugins import web
+from AD.plugins import rdp
+from AD.plugins import mssql
+from AD.plugins import adcs
 
 app = typer.Typer(
     name="adtool",
@@ -139,5 +143,48 @@ def domain(
     Enumeración del dominio Active Directory.
     """
     domain_module.enum(target, port)
+
+@app.command()
+def web(
+    target: str
+):
+    """
+    Enumeración Web.
+    """
+    web_module.check(target)
+
+
+@app.command()
+def rdp(
+    target: str,
+    port: int = typer.Option(3389, "--port", "-p")
+):
+    """
+    Enumeración RDP.
+    """
+    rdp_module.check(target, port)
+
+
+@app.command()
+def mssql(
+    target: str,
+    port: int = typer.Option(1433, "--port", "-p")
+):
+    """
+    Enumeración MSSQL.
+    """
+    mssql_module.check(target, port)
+
+
+@app.command()
+def adcs(
+    target: str
+):
+    """
+    Enumeración Active Directory Certificate Services.
+    """
+    adcs_module.check(target)
+
+
 if __name__ == "__main__":
     app()
