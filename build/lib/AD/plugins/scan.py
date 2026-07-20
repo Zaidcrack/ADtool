@@ -10,6 +10,10 @@ from AD.plugins import winrm
 from AD.plugins import gc
 from AD.plugins import adws
 from AD.plugins import ldaps
+from AD.plugins import web
+from AD.plugins import rdp
+from AD.plugins import mssql
+from AD.plugins import adcs
 
 def run(target):
 
@@ -49,7 +53,16 @@ def run(target):
     results["gc"] = gc.check(target, 3268)
 
     results["adws"] = adws.check(target, 9389)
-    
+
+    results["web"] = web.check(target)
+
+    results["rdp"] = rdp.check(target, 3389)
+
+    results["mssql"] = mssql.check(target, 1433)
+
+    results["adcs"] = adcs.check(target)    
+  
+
     success("Escaneo terminado")
     show_report(results)
 

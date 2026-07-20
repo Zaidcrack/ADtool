@@ -1,7 +1,6 @@
 import requests
 
 from core.logger import info, success, warning
-from core.network import check_tcp
 
 
 def check(target):
@@ -11,7 +10,8 @@ def check(target):
     result = {
         "target": target,
         "protocol": "ADCS",
-        "status": "offline"
+        "status": "offline",
+        "port": "80/443"
     }
 
     paths = [

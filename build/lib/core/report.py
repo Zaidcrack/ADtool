@@ -26,11 +26,23 @@ def show_report(results):
                     f"UDP: {'OPEN' if data['udp'] else 'CLOSED'}"
                 )
 
-            elif service == "dns":
+            elif service == "web":
+                details = data.get(
+                    "server",
+                    f"Puerto {data['port']}"
+                )
+
+            elif service == "adcs":
+                details = data.get(
+                    "url",
+                    "CertSrv"
+                )
+
+            elif "port" in data:
                 details = f"Puerto {data['port']}"
 
             else:
-                details = f"Puerto {data['port']}"
+                details = "-"
 
         table.add_row(
             service.upper(),

@@ -10,7 +10,8 @@ def check(target):
     result = {
         "target": target,
         "protocol": "WEB",
-        "status": "offline"
+        "status": "offline",
+        "port": "-"
     }
 
     for scheme, port in [("http", 80), ("https", 443)]:
