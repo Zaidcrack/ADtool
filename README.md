@@ -87,7 +87,7 @@ adtool adws 10.10.10.10
 - [x] Global Catalog
 - [x] Active Directory Web Services
 - [x] Escaneo completo
-
+- [x] Exportación json y csv
 ### Próximamente 🚧
 
 - [ ] Enumeración de usuarios
