@@ -1,5 +1,8 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 from core.logger import info, success
 from core.report import show_report
+from core.export import export_json, export_csv
 
 from AD.plugins import smb
 from AD.plugins import ldap
@@ -15,55 +18,56 @@ from AD.plugins import rdp
 from AD.plugins import mssql
 from AD.plugins import adcs
 
-def run(target):
+
+def run(target, json_output=False, csv_output=False):
 
     info(f"Iniciando escaneo AD contra {target}")
 
     results = {}
 
-    results["smb"] = smb.check(
-        target,
-        445,
-        3
-    )
+    tasks = {
+        "smb": lambda: smb.check(target, 445, 3),
+        "ldap": lambda: ldap.enum(target, 389),
+        "kerberos": lambda: kerberos.check(target, 88),
+        "dns": lambda: dns.enum(target, 53),
+        "rpc": lambda: rpc.check(target, 135),
+        "winrm": lambda: winrm.check(target, 5985),
+        "ldaps": lambda: ldaps.check(target, 636),
+        "gc": lambda: gc.check(target, 3268),
+        "adws": lambda: adws.check(target, 9389),
+        "web": lambda: web.check(target),
+        "rdp": lambda: rdp.check(target, 3389),
+        "mssql": lambda: mssql.check(target, 1433),
+        "adcs": lambda: adcs.check(target),
+    }
 
-    results["ldap"] = ldap.enum(
-        target,
-        389
-    )
+    with ThreadPoolExecutor(max_workers=8) as executor:
 
-    results["kerberos"] = kerberos.check(
-        target,
-        88
-    )
+        futures = {
+            executor.submit(task): name
+            for name, task in tasks.items()
+        }
 
-    results["dns"] = dns.enum(
-        target,
-        53
-    )
-    
-    results["rpc"] = rpc.check(
-        target,
-       135
-    )
-    results["winrm"] = winrm.check(target, 5985)
+        for future in as_completed(futures):
+            service = futures[future]
 
-    results["ldaps"] = ldaps.check(target, 636)
+            try:
+                results[service] = future.result()
 
-    results["gc"] = gc.check(target, 3268)
-
-    results["adws"] = adws.check(target, 9389)
-
-    results["web"] = web.check(target)
-
-    results["rdp"] = rdp.check(target, 3389)
-
-    results["mssql"] = mssql.check(target, 1433)
-
-    results["adcs"] = adcs.check(target)    
-  
+            except Exception as e:
+                results[service] = {
+                    "status": "error",
+                    "error": str(e)
+                }
 
     success("Escaneo terminado")
+
     show_report(results)
+
+    if json_output:
+        export_json(results)
+
+    if csv_output:
+        export_csv(results)
 
     return results

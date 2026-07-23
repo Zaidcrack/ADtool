@@ -185,6 +185,16 @@ def adcs(
     """
     adcs_module.check(target)
 
+@app.command()
+def scan(
+    target: str,
+    json_output: bool = typer.Option(False, "--json"),
+    csv_output: bool = typer.Option(False, "--csv")
+):
+    """
+    Escaneo completo de servicios Active Directory.
+    """
+    scan_module.run(target, json_output, csv_output)
 
 if __name__ == "__main__":
     app()

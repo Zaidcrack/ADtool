@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ADtool"
+version = "0.1.0"
+description = "Active Directory Enumeration Toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"   # o la licencia que uses
+authors = [
+    { name = "Zaidcrack" }
+]
+
+keywords = [
+    "Active Directory",
+    "AD",
+    "Pentest",
+    "Enumeration",
+    "Windows",
+    "Security"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+]
+
+dependencies = [
+    "typer",
+    "rich",
+    "requests"
+]
+
+[project.scripts]
+adtool = "AD.cli:app"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["AD*", "core*"] 
