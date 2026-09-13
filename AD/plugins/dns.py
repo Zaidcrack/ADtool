@@ -30,7 +30,6 @@ def enum(target, port, domain=None):
             "status": "online"
         }
 
-        # Si no conocemos el dominio, terminamos aquí
         if domain is None:
             return results
 
@@ -40,11 +39,14 @@ def enum(target, port, domain=None):
         resolver.nameservers = [target]
 
         srv_records = {
-            "LDAP": f"_ldap._tcp.dc._msdcs.{domain}",
-            "KERBEROS": f"_kerberos._tcp.{domain}",
-            "GC": f"_gc._tcp.{domain}"
-        }
-
+        "LDAP": f"_ldap._tcp.dc._msdcs.{domain}",
+        "KERBEROS_TCP": f"_kerberos._tcp.{domain}",
+        "KERBEROS_UDP": f"_kerberos._udp.{domain}",
+        "GC": f"_gc._tcp.{domain}",
+        "KPASSWD_TCP": f"_kpasswd._tcp.{domain}",
+        "KPASSWD_UDP": f"_kpasswd._udp.{domain}",
+        "PDC": f"_ldap._tcp.pdc._msdcs.{domain}"
+}
         results["srv"] = {}
 
         for service, record in srv_records.items():

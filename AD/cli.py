@@ -12,10 +12,10 @@ from AD.plugins import winrm as winrm_module
 from AD.plugins import gc as gc_module
 from AD.plugins import adws as adws_module
 from AD.plugins import domain as domain_module
-from AD.plugins import web
-from AD.plugins import rdp
-from AD.plugins import mssql
-from AD.plugins import adcs
+from AD.plugins import web as web_module
+from AD.plugins import rdp as rdp_module
+from AD.plugins import mssql as mssql_module
+from AD.plugins import adcs as adcs_module
 
 app = typer.Typer(
     name="adtool",
@@ -38,13 +38,26 @@ def main(ctx: typer.Context):
 def smb(
     target: str,
     port: int = typer.Option(445, "--port", "-p"),
-    timeout: int = typer.Option(3, "--timeout", "-t")
+    timeout: int = typer.Option(3, "--timeout", "-t"),
+    username: str = typer.Option("", "--username", "-u"),
+    password: str = typer.Option("", "--password", "-P"),
+    domain: str = typer.Option("", "--domain", "-d"),
+    hashes: str = typer.Option("", "--hashes", "-H"),
+    kerberos: bool = typer.Option(False, "--kerberos", "-k"),
 ):
     """
     Comprobación y análisis del servicio SMB.
     """
-    smb_module.check(target, port, timeout)
-
+    smb_module.check(
+        target,
+        port,
+        timeout,
+        username,
+        password,
+        domain,
+        hashes,
+        kerberos
+    )
 
 @app.command()
 def ldap(
@@ -195,6 +208,7 @@ def scan(
     Escaneo completo de servicios Active Directory.
     """
     scan_module.run(target, json_output, csv_output)
+
 
 if __name__ == "__main__":
     app()
