@@ -16,6 +16,7 @@ from AD.plugins import web as web_module
 from AD.plugins import rdp as rdp_module
 from AD.plugins import mssql as mssql_module
 from AD.plugins import adcs as adcs_module
+from AD.plugins import users as users_module
 
 app = typer.Typer(
     name="adtool",
@@ -209,6 +210,24 @@ def scan(
     """
     scan_module.run(target, json_output, csv_output)
 
+@app.command()
+def users(
+    target: str,
+    port: int = typer.Option(389, "--port", "-p"),
+    username: str = typer.Option("", "--username", "-u"),
+    password: str = typer.Option("", "--password", "-P"),
+    domain: str = typer.Option("", "--domain", "-d")
+):
+    """
+    Enumeración de usuarios de Active Directory.
+    """
+    users_module.enum(
+        target,
+        port,
+        username,
+        password,
+        domain
+    )
 
 if __name__ == "__main__":
     app()

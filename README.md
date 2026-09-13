@@ -20,8 +20,8 @@ Herramienta de enumeración para **Active Directory** desarrollada en **Python**
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/Zaidcrack/ADtoolkit.git
-cd ADtoolkit
+git clone https://github.com/Zaidcrack/ADtool.git
+cd ADtool
 ```
 
 Instalar con **pipx**:
